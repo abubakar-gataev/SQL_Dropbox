@@ -680,10 +680,14 @@ group by reisnr
 order by deelnemers desc, reisnr
 ```
 ---
->Welke reizen hebben exact drie verschillende hemelobjecten als reisdoel?
+Welke reizen hebben exact drie verschillende hemelobjecten als reisdoel?
 Sorteer op reisnr.
 ```
-Niet gevonden
+select r.reisnr from reizen r
+inner join bezoeken b on b.reisnr = r.reisnr
+group by r.reisnr
+having count(distinct b.objectnaam) = 3
+order by r.reisnr
 ```
 ---
 Maak een lijst met een overzicht van de reizen en het aantal deelnemers van elke reis. Orden de lijst dalend op basis van het aantal deelnemers, als er eenzelfde aantal deelnemers is, moeten deze stijgend geordend worden volgens reisnummer.
